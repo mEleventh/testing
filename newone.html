@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>شرح سكربت Selenium لأتمتة بعض العمليات في منصة مدرستي</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #acbed3;
+      }
+      h1,
+      h2 {
+        color: #152535;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .section {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      code {
+        background-color: #f0f0f0;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: "Courier New", Courier, monospace;
+      }
+      .function {
+        margin-bottom: 15px;
+      }
+      .function-name {
+        font-weight: bold;
+        color: #2980b9;
+      }
+      .important {
+        background-color: #ffe0b2;
+        border-left: 5px solid #ff9800;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      pre {
+        background-color: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: "Courier New", Courier, monospace;
+      }
+      .code-comment {
+        color: #5c6370;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>شرح سكربت Selenium لأتمتة بعض العمليات في منصة منصة مدرستي</h1>
+
+    <div class="section">
+      <h2>نظرة عامة</h2>
+      <p>
+        هذا السكربت يقوم بأتمتة عملية تسجيل الدخول إلى منصة مدرستي وتقديم كلمة المرور و المصادقة الثنائية و تحضير الدروس و انشاء الإعلانات
+        و محاكاة تفاعلات المستخدم مع المتصفح.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>نموذج من المكتبات المستخدمة</h2>
+      <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import pyotp
+from webdriver_manager.chrome import ChromeDriverManager
+        </pre
+      >
+      <p>
+         المكتبات التي ذكرنا توفر الأدوات اللازمة للتحكم في المتصفح وإدارة عناصر الصفحة
+        والتعامل مع الانتظار والمصادقة.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>الوظائف الرئيسية</h2>
+
+      <div class="function">
+        <p class="function-name">setup_driver()</p>
+        <p>فيما يلي بعض من إعدادات متصفح كروم طبعاً بما يتناسب مع الأتمتة الي تحتاج.</p>
+        <pre>
+def setup_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-web-security")
+    chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_experimental_option('useAutomationExtension', False)
+    service = Service(ChromeDriverManager().install())
+    return webdriver.Chrome(service=service, options=chrome_options)
+            </pre
+        >
+        <p>
+          هذه الدالة لتحسين الأداء
+         أثناء الأتمتة. وهي تحتاج اخذ الحيطة والحذر لانها تقوم بالغاء الحماية والامان عند تكوين خيارات المتصفح 
+        </p>
+      </div>
+
+      <div class="function">
+        <p class="function-name">login_to_madrasati(driver)</p>
+        <p>
+           تسجيل الدخول إلى منصة مدرستي،إدخال البريد
+          الإلكتروني وكلمة المرور و كذلك رمز المصادقة الثنائية.
+        </p>
+        <pre>
+def login_to_madrasati(driver):
+    driver.get("https://schools.madrasati.sa/Auth/SignIn")
+    
+    email_field = wait_for_element(driver, (By.ID, "i0116"))
+    email_field.send_keys("t323867@qsmb.moe.gov.sa")
+    
+    password_field = wait_for_element(driver, (By.ID, "i0118"))
+    password_field.send_keys("m***********?")
+    
+    <span class="code-comment"># كود المصادقة الثنائية</span>
+    totp = pyotp.TOTP('w***************p')
+    code = totp.now()
+    code_field = wait_for_element(driver, (By.XPATH, "//input[@name='otc']"))
+    code_field.send_keys(code)
+            </pre>
+        <p>
+          هذه الدالة نستخدمها للانتظار في العمليات او بينها, سواءً لضمان تحميل عناصر الصفحة قبل
+          التفاعل معها.او متابعة اي مدخلات على البيانات المعروضة مثلا متابعة الاسواق او حتى متابعة الردود على حسابك في تويتر والتفاعل معها
+        </p>
+      </div>
+
+
+
+
+      <div class="function">
+        <p class="function-name">navigate_to_homepage(driver)</p>
+        <p>
+            الانتقال إلى صفحة المدرسة ثم الجدول و الحصص  .
+        </p>
+        <pre>
+def navigate_to_homepage(driver):
+    print(" الانتقال إلى صفحة المدرسة...")
+    driver.get("https://schools.madrasati.sa/SchoolManagment/Actions/Teacher/9A2BF1D94678A11E1B807A46B3C16B05")
+
+def navigate_to_Schedule(driver):
+    print(" الانتقال إلى الجدول ...")
+    driver.get("https://schools.madrasati.sa/SchoolSchedule/Schedule/TeacherSchedule?SchoolId=9A2BF1D94678A11E1B807A46B3C16B05")
+
+def navigate_to_Sunday1st(driver):
+    print(" الانتقال إلى الاحد الدرس الاول ...")
+    driver.get("https://schools.madrasati.sa/Teacher/Lessons/LessonDetailsNew?Data=0E1FD67DE45A54BA34BE2EC7C889A8FBA85927CCCE0AE90D8BA8E5FD7CB040A8A3E9EF36131A2EE2ABDE71C324D2EC8C7E859955014CF212ACB93256ED58054229B0F925651B2F630445C8EA44DAC28D")
+
+    </div>
+
+
+
+
+    <div class="function">
+        <p class="function-name">navigate_to_homepage(driver)</p>
+        <p>
+           تحضير الدروس مباشرة او باستخدام ملف csv او json او غيرها .
+        </p>
+        <pre>
+def fill_lesson_form(driver):
+    try:
+        select_element = wait_for_element(driver, (By.ID, "SelectedUnitId"))
+        select = Select(select_element)
+        select.select_by_value("3750") 
+        print("تم اختيار العنصر بنجاح") 
+
+        select_element = wait_for_element(driver, (By.ID, "SelectedTrees_2"))
+        select = Select(select_element)
+        select.select_by_visible_text("Good Morning")
+
+        select2_element = wait_for_element(driver, (By.CSS_SELECTOR, "#SelectedTrees_3 + .select2"))
+        select2_element.click()
+
+        search_input = wait_for_element(driver, (By.CSS_SELECTOR, ".select2-search__field"))
+        search_input.send_keys("Writing +Project+ Form, Meaning and Function")
+        search_input.send_keys(Keys.ENTER)
+
+        wait_and_click(driver, (By.CSS_SELECTOR, "a.btn.btn-primary[onclick*='firstLessonDetailsPageSuccess']"))
+
+        # قراءة البيانات من ملف CSV
+        with open(CSV_PATH, 'r', encoding='utf-8') as file:
+            csv_reader = csv.DictReader(file)
+            lesson_data = next(csv_reader)
+
+        # تحضير الدرس
+        wait_and_send_keys(driver, (By.ID, "LectureClassPreparationText"), lesson_data['التهيئة'])
+        wait_and_send_keys(driver, (By.ID, "LessonVocabulary"), lesson_data['مفردات الدرس'])
+
+        for goal in lesson_data['الأهداف'].split(','):
+            wait_and_click(driver, (By.ID, f"goal_{goal.strip()}"))
+
+        for activity in lesson_data['الأنشطة'].split(','):
+            wait_and_click(driver, (By.ID, f"chkbox_{activity.strip()}"))
+
+        for strategy in lesson_data['استراتيجيات التدريس'].split(','):
+            wait_and_click(driver, (By.ID, f"strategy_{strategy.strip()}"))
+
+        for tool in lesson_data['الوسائل التعليمية'].split(','):
+            wait_and_click(driver, (By.ID, f"teachingTools_{tool.strip()}"))
+
+        wait_and_send_keys(driver, (By.ID, "ThinkingSkills"), lesson_data['مهارات التفكير'])
+        wait_and_send_keys(driver, (By.ID, "LectureClassCloseText"), lesson_data['إغلاق الدرس'])
+
+        # إضافة الإثراءات والواجبات والأنشطة
+        add_enrichment(driver)
+        add_assignment(driver)
+        add_project(driver)
+
+        wait_and_send_keys(driver, (By.ID, "TeacherNote"), lesson_data['تعليمات المعلم'])
+
+        # حفظ التحضير
+        wait_and_click(driver, (By.CSS_SELECTOR, "button.submit-form-btn"))
+
+        print("تم تحضير الدرس بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ أثناء تحضير الدرس: {str(e)}")
+        raise
+
+# دوال إضافة الإثراءات والواجبات والأنشطة
+
+def add_enrichment(driver):
+    wait_and_click(driver, (By.CSS_SELECTOR, "a.btn.btn-primary.btn-main[onclick='loadActivities();']"))
+    wait_and_click(driver, (By.CSS_SELECTOR, "a.selectActivity.btn.btn-primary.btn-xs"))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "ActivitiesDiv")))
+
+
+def add_assignment(driver):
+    print(" إضافة الواجب")
+    try:
+        # استخدام JavaScript للنقر على الزر
+        add_assignment_button = driver.find_element(By.CSS_SELECTOR, "a.btn.btn-primary[onclick='loadAssignments();']")
+        driver.execute_script("arguments[0].click();", add_assignment_button)
+        print("تم النقر على زر إضافة واجب")
+
+        # انتظار ظهور زر "اختيار الواجب" والنقر عليه
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.selectAssignment.btn.btn-primary.btn-xs")))
+        select_assignment_button = driver.find_element(By.CSS_SELECTOR, "a.selectAssignment.btn.btn-primary.btn-xs")
+        driver.execute_script("arguments[0].click();", select_assignment_button)
+        print("تم النقر على زر اختيار الواجب")
+
+        # انتظار ظهور النافذة المنبثقة
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "asdate_96539765")))
+        print("ظهرت النافذة المنبثقة")
+
+        # تحديد تاريخ البداية
+        start_date_input = driver.find_element(By.ID, "asdate_96539765")
+        driver.execute_script("arguments[0].value = '1446/03/01';", start_date_input)
+        print("تم إدخال تاريخ البداية")
+
+        # تجديد تاريخ النهاية
+        end_date_input = driver.find_element(By.ID, "aedate_96539765")
+        driver.execute_script("arguments[0].value = '1446/03/07';", end_date_input)
+        print("تم إدخال تاريخ النهاية")
+
+        # التحقق من وجود حقل درجة الواجب وإدخال القيمة إذا كان موجودًا
+        grade_input = driver.find_elements(By.ID, "gradeInAssignment_96539765")
+        if grade_input:
+            driver.execute_script("arguments[0].value = '1';", grade_input[0])
+            print("تم إدخال درجة الواجب")
+
+        # النقر على زر الحفظ
+        save_button = driver.find_element(By.CSS_SELECTOR, "a.btn.btn-primary.btn-main[onclick^='checkAssignment']")
+        driver.execute_script("arguments[0].click();", save_button)
+        print("تم النقر على زر الحفظ")
+
+        # انتظار اغلاق النافذة المنبثقة
+        WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "selectAssignmentForm_96539765")))
+        print("تم إغلاق النافذة المنبثقة")
+
+        print("تم إضافة الواجب بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ أثناء إضافة الواجب: {str(e)}")
+        raise
+
+def select_assignment_date_from_calendar(driver, target_date):
+    year, month, day = map(int, target_date.split('/'))
+    
+    # اختيار السنة
+    year_select = Select(driver.find_element(By.CSS_SELECTOR, "select.calendars-month-year:nth-child(2)"))
+    year_select.select_by_value(f"{month}/{year}")
+    
+    # اختيار الشهر
+    month_select = Select(driver.find_element(By.CSS_SELECTOR, "select.calendars-month-year:first-child"))
+    month_select.select_by_value(f"{month}/{year}")
+    
+    # اختيار اليوم
+    day_element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, f"//a[text()='{day}']"))
+    )
+    day_element.click()
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+      <div class="function">
+        <p class="function-name">create_announcement(driver)</p>
+        <p>
+          إنشاء إعلان جديد في المنصة، بما في ذلك إدخال العنوان والوصف
+          وتاريخ النشر وإضافة رابط.
+        </p>
+        <pre>
+def create_announcement(driver):
+    wait_and_send_keys(driver, (By.ID, "Title"), "الاسبوع الثاني")
+    wait_and_send_keys(driver, (By.ID, "Description"), "الخطة الاسبوعية")
+    wait_and_send_keys(driver, (By.ID, "PublishStartDate"), "1446/03/7")
+    wait_and_send_keys(driver, (By.ID, "PublishEndDate"), "1446/03/11")
+    
+    <span class="code-comment"># إضافة رابط</span>
+    add_link_locator = (By.CLASS_NAME, "btn btn-default btn-xs")
+    wait_and_click(driver, add_link_locator)
+    
+    <span class="code-comment"># التعامل مع الصفحة المنبثقة</span>
+    handle_popup(driver)
+            </pre>
+        <p>
+          هذه الدالة للانتظار وارسال -كتابة- نص <code>wait_and_send_keys</code> و
+          <code>wait_and_click</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>التعامل مع الأخطاء وإعادة المحاولة</h2>
+      <pre>
+def retry_on_failure(func, max_attempts=3):
+    for attempt in range(max_attempts):
+        try:
+            func()
+            return
+        except Exception as e:
+            print(f"فشل المحاولة {attempt + 1}: {str(e)}")
+            if attempt == max_attempts - 1:
+                raise
+        </pre
+      >
+      <p>
+        هذه الدالة لتنفيذ الوظيفة المعطاة مع إعادة المحاولة retry_on_failure
+         في حالة حدوث أخطاء،
+         مع تحديد المحاولات هنا max_attempts
+         مما يزيد من احتمالية نجاح السكربت.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>الدالة الرئيسية</h2>
+      <pre>
+
+# الدالة الرئيسية
+def main():
+    driver = None
+    try:
+        driver = setup_driver()
+        print("تم إعداد المتصفح بنجاح")
+        login_to_madrasati(driver)
+        WebDriverWait(driver, 10).until(EC.url_contains("madrasati.sa"))
+        navigate_to_homepage(driver)
+        navigate_to_Schedule(driver)
+        navigate_to_Sunday1st(driver)
+        fill_lesson_form(driver)
+        print("تم تنفيذ جميع الخطوات بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ: {e}")
+    finally:
+        if driver:
+            driver.quit()
+
+if __name__ == "__main__":
+    main()
+        </pre
+      >
+      <p>
+        الدالة الرئيسية تكون في اسفل النص البرمجي فمثلا لو قمت بتعريف كل الدوال التي ستستخدمها الان 
+        او تفكر باستخدمها فلن يقوم الكود باستخدام اي منها ولكن سيقوم
+        بالمضي قدماً بتنفيذ الدالة الرئيسية كما هي مرتبة او مصممة. 
+        اذا فهذه الدالة تقوم بتنفيذ تدفق العمل الكامل، بدءًا من إعداد المتصفح
+        و مرورا بالعلميات المطلوبة و وصولاً الى التعامل مع الأخطاء وانتهاءً بإغلاق المتصفح.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>ملاحظات هامة </h2>
+      <div class="important">
+        <p>
+          1.   تحت الخاتمة في الاسفل يوجد الكود كاملاً والذي قمنا بتجربته في الفيديو. يحتاج منك تغير اسم المستخدم 
+          و الرقم السري و المصادقة الثنائية
+          كذلك تغير مسار الملف حسب المسار الذي ستضع الملف عليه في جهازك 
+          واخيراً تأكد من وجود مسار لبياثون في متغيرات البيئة في نظامك.   
+          
+          أرجوا منكم اخواني أخذ الحيطة والحذر او استخدام حسابات ثانوية 
+          او اجهزة غير رسمية. تأكد من حماية
+          معلوماتك وبياناتك.
+         وهذا اعلان اخلاء مسوؤلية
+          والغرض من هذا العمل هو الشرح و ان تعم الفائدة والله من وراء القصد .
+        </p>
+        <p>
+          عن تجربة شخصية وعن نفسي اقول ان البحث في المصادر المفتوحة ولا غير المصادر المفتوحة هو المكان المناسب للبحث والتعلم ولن نتعلم البرمجة الا بممارسة البرمجة نفسها 
+        </p>
+        <p>
+          3.  الفكرة المبدئية هي حجر اساس كل نجاح فقط تحتاج من يتبناها و من يشارك بتطويرها 
+          وافكر بتصميم قوالب اتمتة لتنفيذ العمليات المبسطة والمخصصة و الموجهة للاطفال 
+          لتحفيز شغفهم بالتقنية سواء اتممتة لرفع واجباتهم او ادخالها في العابهم روبلكس او غيرها. 
+        </p>
+        <p>
+          4. هناك من الخدمات التي لاحصر لها في هذا المجال و جدولة العمليات على مدار الساعة 
+           وخيارات تشغيل متعددة سواءاً على سحابة او حاوية اوسيرفر خاص او حتى كمبوتر شخصي   
+        </p>
+
+        <p>
+            5.يستطيع البرنامج العمل ايضاً على تجريف البيانات و متابعة التغيرات
+             و جلب المعلومات و غيرها  
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>الخاتمة</h2>
+      <p>
+        هذا السكربت تجربة لاستخدام سيلينيوم بطريقة فعالة لأتمتة تحضير درس وإنشاء الإعلانات في منصة
+        مدرستي. يتعامل مع الأخطاء والانتظار لعناصر
+        الصفحة. يمكن تعديله بسهولة لأداء مهام إضافية أو تعدد المحاولات والطرق مع التغييرات في
+        واجهة المنصة.
+      </p>
+    </div>
+
+
+    
+
+<div class="section">
+      <h2> هذا هو الكود المستخدم في الفيديو المرسل لكم في التليقرام </h2>
+      <pre>
+
+import os
+import csv
+import io
+from PIL import Image
+import pyotp
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+
+# تكوين المسارات
+BASE_DIR = r"C:\Users\m7md7\Desktop\madrasati"
+CSV_PATH = os.path.join(BASE_DIR, 'google-sheet.csv')
+
+# الدوال المساعدة
+def wait_for_element(driver, locator, timeout=20):
+    return WebDriverWait(driver, timeout).until(EC.presence_of_element_located(locator))
+
+def wait_and_click(driver, locator, timeout=20):
+    element = WebDriverWait(driver, timeout).until(EC.element_to_be_clickable(locator))
+    element.click()
+
+def wait_and_send_keys(driver, locator, keys, timeout=20):
+    element = WebDriverWait(driver, timeout).until(EC.presence_of_element_located(locator))
+    element.clear()
+    element.send_keys(keys)
+
+
+# إعداد المتصفح
+def setup_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-web-security")
+    chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument("--window-size=1920,1080")
+    service = Service(ChromeDriverManager().install())
+    return webdriver.Chrome(service=service, options=chrome_options)
+
+# تسجيل الدخول
+def login_to_madrasati(driver):
+    print(" تسجيل الدخول إلى منصة مدرستي.")
+    driver.get("https://schools.madrasati.sa/Auth/SignIn")
+
+    wait_and_send_keys(driver, (By.ID, "i0116"), "t323867@qsmb.moe.gov.sa")
+    wait_and_click(driver, (By.ID, "idSIButton9"))
+
+    wait_and_send_keys(driver, (By.ID, "i0118"), "mo108777Hs?????")
+    wait_and_click(driver, (By.ID, "idSIButton9"))
+
+    totp = pyotp.TOTP('wkmbt7bqfnmznq6p')
+    code = totp.now()
+    wait_and_send_keys(driver, (By.XPATH, "//input[@name='otc']"), code)
+    wait_and_click(driver, (By.XPATH, "//input[@type='submit']"))
+
+    wait_and_click(driver, (By.ID, "idSIButton9"))
+
+    try:
+        WebDriverWait(driver, 15).until(EC.url_contains("madrasati.sa/Dashboards/Schools"))
+        print("تم تسجيل الدخول والانتقال إلى الصفحة الرئيسية بنجاح")
+    except TimeoutException:
+        print("فشل الانتقال إلى الصفحة الرئيسية")
+        raise
+
+# التنقل في الموقع
+def navigate_to_homepage(driver):
+    print(" الانتقال إلى صفحة المدرسة.")
+    driver.get("https://schools.madrasati.sa/SchoolManagment/Actions/Teacher/9A2BF1D94678A11E1B807A46B3C16B05")
+
+def navigate_to_Schedule(driver):
+    print(" الانتقال إلى الجدول .")
+    driver.get("https://schools.madrasati.sa/SchoolSchedule/Schedule/TeacherSchedule?SchoolId=9A2BF1D94678A11E1B807A46B3C16B05")
+
+def navigate_to_Sunday1st(driver):
+    print(" الانتقال إلى الاحد الدرس الاول.")
+    driver.get("https://schools.madrasati.sa/Teacher/Lessons/LessonDetailsNew?Data=0E1FD67DE45A54BA34BE2EC7C889A8FBA85927CCCE0AE90D8BA8E5FD7CB040A8A3E9EF36131A2EE2ABDE71C324D2EC8C7E859955014CF212ACB93256ED58054229B0F925651B2F630445C8EA44DAC28D")
+
+#  تخطيط الدرس
+def fill_lesson_form(driver):
+    try:
+        select_element = wait_for_element(driver, (By.ID, "SelectedUnitId"))
+        select = Select(select_element)
+        select.select_by_value("3750")
+        print("تم اختيار العنصر بنجاح")
+
+        select_element = wait_for_element(driver, (By.ID, "SelectedTrees_2"))
+        select = Select(select_element)
+        select.select_by_visible_text("Good Morning")
+
+        select2_element = wait_for_element(driver, (By.CSS_SELECTOR, "#SelectedTrees_3 + .select2"))
+        select2_element.click()
+
+        search_input = wait_for_element(driver, (By.CSS_SELECTOR, ".select2-search__field"))
+        search_input.send_keys("Writing +Project+ Form, Meaning and Function")
+        search_input.send_keys(Keys.ENTER)
+
+        wait_and_click(driver, (By.CSS_SELECTOR, "a.btn.btn-primary[onclick*='firstLessonDetailsPageSuccess']"))
+
+        # قراءة البيانات من ملف CSV
+        with open(CSV_PATH, 'r', encoding='utf-8') as file:
+            csv_reader = csv.DictReader(file)
+            lesson_data = next(csv_reader)
+
+        #  تخطيط الدرس
+        wait_and_send_keys(driver, (By.ID, "LectureClassPreparationText"), lesson_data['التهيئة'])
+        wait_and_send_keys(driver, (By.ID, "LessonVocabulary"), lesson_data['مفردات الدرس'])
+
+        for goal in lesson_data['الأهداف'].split(','):
+            wait_and_click(driver, (By.ID, f"goal_{goal.strip()}"))
+
+        for activity in lesson_data['الأنشطة'].split(','):
+            wait_and_click(driver, (By.ID, f"chkbox_{activity.strip()}"))
+
+        for strategy in lesson_data['استراتيجيات التدريس'].split(','):
+            wait_and_click(driver, (By.ID, f"strategy_{strategy.strip()}"))
+
+        for tool in lesson_data['الوسائل التعليمية'].split(','):
+            wait_and_click(driver, (By.ID, f"teachingTools_{tool.strip()}"))
+
+        wait_and_send_keys(driver, (By.ID, "ThinkingSkills"), lesson_data['مهارات التفكير'])
+        wait_and_send_keys(driver, (By.ID, "LectureClassCloseText"), lesson_data['إغلاق الدرس'])
+
+        # إضافة الإثراء والواجب 
+        add_enrichment(driver)
+        add_assignment(driver)
+
+        wait_and_send_keys(driver, (By.ID, "TeacherNote"), lesson_data['تعليمات المعلم'])
+
+        # حفظ التخطيط
+        wait_and_click(driver, (By.CSS_SELECTOR, "button.submit-form-btn"))
+
+        print("تم تخطيط الدرس بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ أثناء تخطيط الدرس: {str(e)}")
+        raise
+
+# دوال الإثراء والواجب 
+def add_enrichment(driver):
+    wait_and_click(driver, (By.CSS_SELECTOR, "a.btn.btn-primary.btn-main[onclick='loadActivities();']"))
+    wait_and_click(driver, (By.CSS_SELECTOR, "a.selectActivity.btn.btn-primary.btn-xs"))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "ActivitiesDiv")))
+
+
+def add_assignment(driver):
+    print( إضافة الواجب.")
+    try:
+        # استخدام JavaScript للنقر على الزر
+        add_assignment_button = driver.find_element(By.CSS_SELECTOR, "a.btn.btn-primary[onclick='loadAssignments();']")
+        driver.execute_script("arguments[0].click();", add_assignment_button)
+        print("تم النقر على زر إضافة واجب")
+
+        # انتظار ظهور زر "اختيار الواجب" والنقر عليه
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.selectAssignment.btn.btn-primary.btn-xs")))
+        select_assignment_button = driver.find_element(By.CSS_SELECTOR, "a.selectAssignment.btn.btn-primary.btn-xs")
+        driver.execute_script("arguments[0].click();", select_assignment_button)
+        print("تم النقر على زر اختيار الواجب")
+
+        # انتظار ظهور النافذة المنبثقة
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "asdate_96539765")))
+        print("ظهرت النافذة المنبثقة")
+
+        # اختيار تاريخ البداية
+        start_date_input = driver.find_element(By.ID, "asdate_96539765")
+        driver.execute_script("arguments[0].value = '1446/03/01';", start_date_input)
+        print("تم إدخال تاريخ البداية")
+
+        # اختيار تاريخ النهاية
+        end_date_input = driver.find_element(By.ID, "aedate_96539765")
+        driver.execute_script("arguments[0].value = '1446/03/07';", end_date_input)
+        print("تم إدخال تاريخ النهاية")
+
+        # التحقق من حقل درجة الواجب وإدخال الدرجة عند وجوده
+        grade_input = driver.find_elements(By.ID, "gradeInAssignment_96539765")
+        if grade_input:
+            driver.execute_script("arguments[0].value = '1';", grade_input[0])
+            print("تم إدخال درجة الواجب")
+
+        # النقر على زر الحفظ
+        save_button = driver.find_element(By.CSS_SELECTOR, "a.btn.btn-primary.btn-main[onclick^='checkAssignment']")
+        driver.execute_script("arguments[0].click();", save_button)
+        print("تم النقر على زر الحفظ")
+
+        # انتظار اغلاق النافذة المنبثقة
+        WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.ID, "selectAssignmentForm_96539765")))
+        print("تم إغلاق النافذة المنبثقة")
+
+        print("تم إضافة الواجب بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ أثناء إضافة الواجب: {str(e)}")
+        raise
+
+def select_assignment_date_from_calendar(driver, target_date):
+    year, month, day = map(int, target_date.split('/'))
+    
+    # اختيار السنة
+    year_select = Select(driver.find_element(By.CSS_SELECTOR, "select.calendars-month-year:nth-child(2)"))
+    year_select.select_by_value(f"{month}/{year}")
+    
+    # اختيار الشهر
+    month_select = Select(driver.find_element(By.CSS_SELECTOR, "select.calendars-month-year:first-child"))
+    month_select.select_by_value(f"{month}/{year}")
+    
+    # اختيار اليوم
+    day_element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, f"//a[text()='{day}']"))
+    )
+    day_element.click()
+
+
+    wait_and_click(driver, (By.CSS_SELECTOR, "button.submit-form-btn"))
+
+        # الضغط على زر "حفظ وإنهاء"
+    save_and_finish_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'submit-form-btn') and contains(text(), 'حفظ و إنهاء')]"))
+        )
+    save_and_finish_button.click()
+
+    print("تم تحضير الدرس وحفظه بنجاح")
+
+
+
+
+# الدالة الرئيسية
+def main():
+    driver = None
+    try:
+        driver = setup_driver()
+        print("تم إعداد المتصفح بنجاح")
+        login_to_madrasati(driver)
+        WebDriverWait(driver, 10).until(EC.url_contains("madrasati.sa"))
+        navigate_to_homepage(driver)
+        navigate_to_Schedule(driver)
+        navigate_to_Sunday1st(driver)
+        fill_lesson_form(driver)
+        print("تم تنفيذ جميع الخطوات بنجاح")
+    except Exception as e:
+        print(f"حدث خطأ: {e}")
+    finally:
+        if driver:
+            driver.quit()
+
+if __name__ == "__main__":
+    main()
+
+        </pre
+      >
+      <p>
+         المكتبات المستخدمة واصدارات البرامج و المتطلبات مرفقة اذا اردت الاطلاع عليها
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="text-align: center">محمد حمود</h3>
+    </div>
+    <div class="card">
+      <a href="index.html" class="card">
+        <h3 style="text-align: center"> العودة للصفحة السابقة</h3>
+    </div>
+
+    
+
+
+
+
+  </body>
+</html>

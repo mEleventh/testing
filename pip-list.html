@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حزم pip</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #000000;
+        --secondary-color: #4c4a4a;
+        --background-color: #505e70;
+        --card-color: #16212f;
+        --text-color: #e1dcdc;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: var(--card-color);
+        border-radius: 5px;
+        box-shadow: 0 5px 5px 5px rgba(197, 210, 215, 0.916);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(5px);
+        box-shadow: 0 1px 2px rgba(29, 29, 29, 0.941);
+      }
+
+      .card i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-color);
+      }
+
+      .card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+        color: #868585;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
+
+      .view-btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.9s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .view-btn:hover {
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+      }
+
+      @media (max-width: 600px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>حزم pip</h2>
+      <a href="https://pypi.org/" class="view-btn"
+        >رابط الصفحة الرسمية ل pip
+      </a>
+    </div>
+    <div class="dashboard">
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>aiohappyeyeballs</h2>
+        <p>2.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>aiohttp</h2>
+        <p>3.10.5</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>aiosignal</h2>
+        <p>1.3.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>annotated-types</h2>
+        <p>0.7.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>anyio</h2>
+        <p>4.4.0</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>appdirs</h2>
+        <p>1.4.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>arabic-reshaper</h2>
+        <p>3.0.0</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>smmap</h2>
+        <p>5.0.1</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>six</h2>
+        <p>1.16.0</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>setuptools</h2>
+        <p>73.0.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>setproctitle</h2>
+        <p>1.3.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>sentry-sdk</h2>
+        <p>2.13.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>selenium</h2>
+        <p>4.24.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>schedule</h2>
+        <p>1.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>sampleproject</h2>
+        <p>3.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>rsa</h2>
+        <p>4.9</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>rich</h2>
+        <p>13.7.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>rfc3986</h2>
+        <p>2.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>requests-toolbelt</h2>
+        <p>1.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>requests-oauthlib</h2>
+        <p>2.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>requests</h2>
+        <p>2.32.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>reportlab</h2>
+        <p>4.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>readme_renderer</h2>
+        <p>44.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>PyYAML</h2>
+        <p>6.0.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pywin32-ctypes</h2>
+        <p>0.2.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>python-dotenv</h2>
+        <p>1.0.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>python-docx</h2>
+        <p>1.1.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>python-bidi</h2>
+        <p>0.6.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>PySocks</h2>
+        <p>1.7.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyproject_hooks</h2>
+        <p>1.1.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>PyPDF2</h2>
+        <p>3.0.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyparsing</h2>
+        <p>3.1.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyotp</h2>
+        <p>2.9.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyOpenSSL</h2>
+        <p>24.2.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyjokes</h2>
+        <p>0.8.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>Pygments</h2>
+        <p>2.18.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pydantic_core</h2>
+        <p>2.20.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pydantic</h2>
+        <p>2.8.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pycparser</h2>
+        <p>2.22</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pycodestyle</h2>
+        <p>2.12.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyasn1_modules</h2>
+        <p>0.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pyasn1</h2>
+        <p>0.6.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>psutil</h2>
+        <p>6.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>protobuf</h2>
+        <p>5.27.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>proto-plus</h2>
+        <p>1.24.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>prompt_toolkit</h2>
+        <p>3.0.47</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>prettytable</h2>
+        <p>3.11.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pre-commit</h2>
+        <p>3.8.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>platformdirs</h2>
+        <p>4.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pkginfo</h2>
+        <p>1.10.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pipx</h2>
+        <p>1.6.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pip</h2>
+        <p>24.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pillow</h2>
+        <p>10.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>peppercorn</h2>
+        <p>0.6</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pdf2image</h2>
+        <p>1.17.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>pathspec</h2>
+        <p>0.12.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>post0 packaging</h2>
+        <p>24.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>outcome .</h2>
+        <p>1.3.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>openai</h2>
+        <p>1.42.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>oauthlib</h2>
+        <p>3.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>oauth2client</h2>
+        <p>4.1.3/p></p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>numpy</h2>
+        <p>2.1.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>nodeenv</h2>
+        <p>1.9.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>nh3</h2>
+        <p>0.2.18</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>mypy-extensions</h2>
+        <p>1.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>multidict</h2>
+        <p>6.0.5</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>more-itertools</h2>
+        <p>10.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>mdurl</h2>
+        <p>0.1.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>MarkupSafe</h2>
+        <p>2.1.5</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>markdown-it-py</h2>
+        <p>3.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>lxml</h2>
+        <p>5.3.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>keyrings.alt</h2>
+        <p>5.0.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>keyring</h2>
+        <p>25.3.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>jiter</h2>
+        <p>0.5.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>Jinja2</h2>
+        <p>3.1.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>jaraco.functools</h2>
+        <p>4.0.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>jaraco.context</h2>
+        <p>6.0.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>jaraco.classes</h2>
+        <p>3.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>itsdangerous</h2>
+        <p>2.2.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>importlib_metadata</h2>
+        <p>8.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>imageio</h2>
+        <p>2.35.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>idna</h2>
+        <p>3.7</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>identify</h2>
+        <p>2.6.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>httpx</h2>
+        <p>0.27.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>httplib2</h2>
+        <p>0.22.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>httpcore</h2>
+        <p>1.0.5</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>h11</h2>
+        <p>0.14.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>gspread</h2>
+        <p>6.1.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>googleapis-common-protos</h2>
+        <p>1.65.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>google-auth-oauthlib</h2>
+        <p>1.2.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>google-auth-httplib2</h2>
+        <p>0.2.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>google-auth</h2>
+        <p>2.34.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>google-api-python-client</h2>
+        <p>2.142.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>google-api-core</h2>
+        <p>2.19.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>GitPython</h2>
+        <p>3.1.43</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>gitdb</h2>
+        <p>4.0.11</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>frozenlist</h2>
+        <p>1.4.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>Flask</h2>
+        <p>3.0.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>filelock</h2>
+        <p>3.15.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>exceptiongroup</h2>
+        <p>1.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>docutils</h2>
+        <p>0.21.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>docker-pycreds</h2>
+        <p>0.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>distro</h2>
+        <p>1.9.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>distlib</h2>
+        <p>0.3.8</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>cryptography</h2>
+        <p>43.0.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>colorama</h2>
+        <p>0.4.6</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>click</h2>
+        <p>8.1.7</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>charset-normalizer</h2>
+        <p>3.3.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>chardet</h2>
+        <p>5.2.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>cfgv</h2>
+        <p>3.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>cffi</h2>
+        <p>1.17.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>certifi</h2>
+        <p>2024.7.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>cachetools</h2>
+        <p>5.5.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>build</h2>
+        <p>1.2.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>blinker</h2>
+        <p>1.8.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>black</h2>
+        <p>24.8.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>autopep8</h2>
+        <p>2.3.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>attrs</h2>
+        <p>24.2.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>async-timeout</h2>
+        <p>4.0.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>argcomplete</h2>
+        <p>3.5.0</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>SoftLayer</h2>
+        <p>6.2.5</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>sortedcontainers</h2>
+        <p>2.4.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>toml</h2>
+        <p>0.10.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>tqdm</h2>
+        <p>4.66.5</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>trio-websocket</h2>
+        <p>0.11.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>trio</h2>
+        <p>0.26.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>twine</h2>
+        <p>5.1.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>typing_extensions</h2>
+        <p>4.12.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>uritemplate</h2>
+        <p>4.1.1</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>urllib3</h2>
+        <p>2.2.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>userpath</h2>
+        <p>1.9.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>virtualenv</h2>
+        <p>20.26.3</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>wandb</h2>
+        <p>0.17.7</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>wcwidth</h2>
+        <p>0.2.13</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>webdriver-manager</h2>
+        <p>4.0.2</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>websocket-client</h2>
+        <p>1.8.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>Werkzeug</h2>
+        <p>3.0.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>wheel</h2>
+        <p>0.44.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>wsproto</h2>
+        <p>1.2.0</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>yarl</h2>
+        <p>1.9.4</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>zipp</h2>
+        <p>3.20.0</p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>العودة الى الصفة السابقة</h2>
+      <a href="index.html" class="view-btn">رجوع </a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مقدمة عن سلينيوم</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #000000;
+        --secondary-color: #4c4a4a;
+        --background-color: #505e70;
+        --card-color: #16212f;
+        --text-color: #e1dcdc;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .card {
+        background-color: var(--card-color);
+        border-radius: 5px;
+        box-shadow: 0 900px 550px 500px rgba(197, 210, 215, 0.916);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(15px);
+        box-shadow: 0 1px 2px rgba(29, 29, 29, 0.941);
+      }
+
+      .card i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-color);
+      }
+
+      .card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+        color: #868585;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
+
+      .view-btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.9s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .view-btn:hover {
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+      }
+
+      @media (max-width: 600px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>نبذة عن اساسيات و متطلبات اتمتة المتصفحات</h2>
+    </div>
+    <h1 class="section-title">
+      مما يميز سيلينيوم انه متوفر باغلب لغات البرمجة و في هذه النبذة استخدمنا
+      بايثون و جافا سكربت
+    </h1>
+    <div class="card">
+      <i class="fas fa-list"></i>
+      <h2>شرح موجز عن Selenium</h2>
+      <p>دليل لتجربة الأتمتة في منصة مدرستي</p>
+      <a href="newone.html" class="view-btn">عرض </a>
+    </div>
+    <div class="dashboard">
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>NPM</h2>
+        <p>عرض حزم NPM المثبتة</p>
+        <a href="npm-list.html" class="view-btn">عرض</a>
+      </div>
+      <div class="card">
+        <i class="fas fa-puzzle-piece"></i>
+        <h2>PIP</h2>
+        <p>عرض حزم Python المثبتة</p>
+        <a href="pip-list.html" class="view-btn">عرض </a>
+      </div>
+      <div class="card">
+        <i class="fas fa-code"></i>
+        <h2>اصدارات البرمجة</h2>
+        <p>عرض إصدارات اللغات المثبتة</p>
+        <a href="prog-langu.html" class="view-btn">عرض </a>
+      </div>
+    </div>
+  </body>
+</html>

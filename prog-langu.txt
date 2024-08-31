@@ -1,0 +1,14 @@
+Python 3.12.5
+v18.20.2
+java version "22.0.2" 2024-07-16
+Java(TM) SE Runtime Environment (build 22.0.2+9-70)
+Java HotSpot(TM) 64-Bit Server VM (build 22.0.2+9-70, mixed mode, sharing)
+VS Code 1.92.2
+Electron  30.1.2
+Chromium: 124.0.6367.243
+Node.js:  20.14.0
+Windows 10 (إصدار 22631)  64 بت.
+pip 24.2
+
+
+

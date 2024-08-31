@@ -1,0 +1,42 @@
+vscode.git-base 1.0.0
+vscode.github 0.0.1
+Shopify.ruby-extensions-pack 0.1.11
+vscode.debug-auto-launch 1.0.0
+benjamin-simmonds.pythoncpp-debug 0.3.0
+vscode.configuration-editing
+vscode.microsoft-authentication
+mechatroner.rainbow-csv
+pyDocGenAI.pyDocGenAI
+vscode.npm
+vscode.github-authentication
+KevinRose.vsc-python-indent
+ms-vscode.azure-repos
+vscode.emmet
+vscode.json-language-features
+ms-vscode-remote.remote-wsl
+ecmel.vscode-html-css
+ritwickdey.LiveServer
+ms-python.pylint
+vscode.typescript-language-features
+ms-vscode.remote-repositories
+ms-azuretools.vscode-azurestaticwebapps
+ms-vscode.azure-account
+GitHub.remotehub
+ms-dotnettools.vscode-dotnet-runtime
+vscode.git
+denoland.vscode-deno
+njpwerner.autodocstring
+esbenp.prettier-vscode
+ms-python.debugpy
+dbaeumer.vscode-eslint
+ms-azuretools.vscode-azureresourcegroups
+ms-edgedevtools.vscode-edge-devtools
+formulahendry.code-runner
+vscode.merge-conflict
+ms-vscode.cpptools
+eamodio.gitlens
+tht13.python
+ms-python.vscode-pylance
+mongodb.mongodb-vscode
+ms-vscode-remote.remote-containers
+ms-python.python

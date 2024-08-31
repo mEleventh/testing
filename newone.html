@@ -129,7 +129,7 @@ def login_to_madrasati(driver):
     driver.get("https://schools.madrasati.sa/Auth/SignIn")
     
     email_field = wait_for_element(driver, (By.ID, "i0116"))
-    email_field.send_keys("t323867@qsmb.moe.gov.sa")
+    email_field.send_keys("t*******************a")
     
     password_field = wait_for_element(driver, (By.ID, "i0118"))
     password_field.send_keys("m***********?")
@@ -511,13 +511,13 @@ def login_to_madrasati(driver):
     print(" تسجيل الدخول إلى منصة مدرستي.")
     driver.get("https://schools.madrasati.sa/Auth/SignIn")
 
-    wait_and_send_keys(driver, (By.ID, "i0116"), "t323867@qsmb.moe.gov.sa")
+    wait_and_send_keys(driver, (By.ID, "i0116"), "t********************a")
     wait_and_click(driver, (By.ID, "idSIButton9"))
 
-    wait_and_send_keys(driver, (By.ID, "i0118"), "mo108777Hs?????")
+    wait_and_send_keys(driver, (By.ID, "i0118"), "m*******************?")
     wait_and_click(driver, (By.ID, "idSIButton9"))
 
-    totp = pyotp.TOTP('wkmbt7bqfnmznq6p')
+    totp = pyotp.TOTP('w*****************************p')
     code = totp.now()
     wait_and_send_keys(driver, (By.XPATH, "//input[@name='otc']"), code)
     wait_and_click(driver, (By.XPATH, "//input[@type='submit']"))
